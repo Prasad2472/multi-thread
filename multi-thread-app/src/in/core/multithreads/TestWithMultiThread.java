@@ -14,7 +14,7 @@ import java.util.concurrent.Future;
  * @author Prasad Boini
  *
  */
-public class ThreadMainApp {
+public class TestWithMultiThread {
 	private static Integer N_THREADS = 10;
 
 	public static void main(final String[] args) {
