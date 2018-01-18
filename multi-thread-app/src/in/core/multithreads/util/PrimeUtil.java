@@ -3,9 +3,6 @@
  */
 package in.core.multithreads.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author Prasad Boini
  *
@@ -37,31 +34,11 @@ public class PrimeUtil {
 		return isPrime;
 	}
 
-	public static Integer getStartIndex(Integer start) {
+	public static Integer getStartIndex(final Integer start) {
 		return start % 2 == 0 ? start + 1 : start;
 	}
 
-	public static Integer getEndIndex(Integer end) {
+	public static Integer getEndIndex(final Integer end) {
 		return end % 2 == 0 ? end - 1 : end;
-	}
-
-	public static void main(String[] args) {
-		List<Integer> primes = new ArrayList<>();
-		Long strt = System.currentTimeMillis();
-		primes.add(2);
-		System.out.println("Strt: " + strt);
-		for (int i = 1; i < 1000000; i = i + 2) {
-			if (isPrimeNumber(i)) {
-				primes.add(i);
-			}
-		}
-		Long end = System.currentTimeMillis();
-		System.out.println("End: " + end);
-
-		System.out.println("Diff: " + (end - strt));
-		System.out.println("Total prime Numbers:" + primes.size());
-		/**
-		 * Strt: 1516185787248 End: 1516185840263 Diff: 53015 Total prime Numbers:78498
-		 */
 	}
 }

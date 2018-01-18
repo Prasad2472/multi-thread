@@ -25,7 +25,7 @@ public class PrimeCallable implements Callable<List<Integer>> {
 
 	@Override
 	public List<Integer> call() throws Exception {
-//		System.out.println("start:" + start + " end:" + end);
+		// System.out.println("start:" + start + " end:" + end);
 		final List<Integer> primesNumbers = new ArrayList<>();
 		final int strt = start % 2 == 0 ? start + 1 : start;
 		final int ends = end % 2 == 0 ? end - 1 : end;
