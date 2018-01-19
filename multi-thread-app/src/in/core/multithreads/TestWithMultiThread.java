@@ -22,34 +22,40 @@ public class TestWithMultiThread {
 		 * Create ExecutorServce, it will create threads.
 		 */
 		final ExecutorService executorService = Executors.newFixedThreadPool(N_THREADS);
-		final List<Future<List<Integer>>> future = new ArrayList<>();
+		List<Future<List<Integer>>> futures = new ArrayList<>();
 		/**
 		 * Track time
 		 */
 		final Long strt = System.currentTimeMillis();
 		System.out.println("Strt: " + strt);
-		PrimeCallable task = null;
+
+		List<PrimeCallable> callables = new ArrayList<>();
+
 		for (int i = 0; i < 1000000; i = i + 1000) {
 			/**
-			 * For Every 1000 numbers create new PrimeCallable
+			 * For Every 1000 numbers create new task
 			 */
-			task = new PrimeCallable(i, i + 1000);
-			/**
-			 * Execute task
-			 */
-			future.add(executorService.submit(task));
+			callables.add(new PrimeCallable(i, i + 1000));
 		}
+		try {
+			/**
+			 * Execute all the tasks
+			 */
+			futures = executorService.invokeAll(callables);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+
 		final List<Integer> primes = new ArrayList<>();
 		/**
 		 * Collect Data from Future Object.
 		 */
-		for (final Future<List<Integer>> future2 : future) {
+		for (final Future<List<Integer>> future2 : futures) {
 			try {
 				primes.addAll(future2.get());
 			} catch (InterruptedException | ExecutionException e) {
 				e.printStackTrace();
 			}
-
 		}
 		final Long end = System.currentTimeMillis();
 		System.out.println("End: " + end);
